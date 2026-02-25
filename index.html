@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinetra AI | Drone-Based Traffic Intelligence</title>
+    <meta name="description" content="Advanced drone-based traffic analysis and congestion management system.">
+    <meta name="keywords" content="AI, Traffic, Drone, Intelligence, Dashboard">
+    
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary-color: #10b981; /* Emerald 500 */
+            --secondary-color: #3b82f6; /* Blue 500 */
+            --bg-dark: #030712; /* Gray 950 */
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
+    }
+
+    @layer base {
+        body {
+            @apply bg-[#050505] text-slate-300 antialiased;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+    }
+
+    @layer components {
+        .glass-panel {
+            @apply bg-[var(--glass-bg)] backdrop-blur-2xl border border-[var(--glass-border)] rounded-2xl shadow-2xl;
+        }
+        .btn-primary {
+            @apply bg-white text-black font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)];
+        }
+        .text-gradient {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-200 to-cyan-400;
+        }
+    }
+    
+    /* Custom animations */
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+    }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" src="components/Navbar.js"></script>
+    <script type="text/babel" src="components/Hero.js"></script>
+    <script type="text/babel" src="app.js"></script>
+</body>
+</html>

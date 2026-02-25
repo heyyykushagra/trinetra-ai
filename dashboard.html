@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Trinetra AI</title>
+    
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+    
+    <script>
+        // Save Chart constructor to avoid conflicts
+        const ChartJS = window.Chart;
+    </script>
+
+    <style type="text/tailwindcss">
+    @layer theme {
+        :root {
+            --primary-color: #10b981;
+            --secondary-color: #3b82f6;
+            --bg-dark: #030712;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+        }
+    }
+    @layer base {
+        body {
+            @apply bg-[#050505] text-slate-300 antialiased selection:bg-emerald-500/30;
+        }
+    }
+    @layer components {
+        .glass-panel {
+            @apply bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)] rounded-2xl shadow-xl;
+        }
+        .btn-primary {
+            @apply bg-emerald-500 hover:bg-emerald-400 text-white font-semibold py-2.5 px-6 rounded-lg transition-all duration-300 shadow-[0_4px_15px_rgba(16,185,129,0.3)];
+        }
+    }
+    .scan-line {
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background: rgba(16, 185, 129, 0.6);
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        animation: scan 2.5s ease-in-out infinite;
+    }
+    @keyframes scan {
+        0% { top: 0%; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { top: 100%; opacity: 0; }
+    }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" src="components/Navbar.js"></script>
+    <script type="text/babel" src="components/Sidebar.js"></script>
+    <script type="text/babel" src="components/StatsCard.js"></script>
+    <script type="text/babel" src="components/AnalysisChart.js"></script>
+    <script type="text/babel" src="components/VideoUpload.js"></script>
+    <script type="text/babel" src="dashboard-app.js"></script>
+</body>
+</html>
