@@ -25,7 +25,7 @@ function Navbar({ activePage }) {
                     ) : (
                          <div className="flex items-center gap-3 pl-6 border-l border-white/5">
                             <div className="flex flex-col items-end">
-                                <span className="text-xs font-semibold text-white">John Doe</span>
+                                <span className="text-xs font-semibold text-white">Kushagra Singh</span>
                                 <span className="text-[10px] text-emerald-400">Admin</span>
                             </div>
                             <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-slate-700 to-slate-600 flex items-center justify-center text-xs font-bold border border-white/10 ring-2 ring-black">

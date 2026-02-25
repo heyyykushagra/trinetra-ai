@@ -1,63 +1,112 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinetra AI | Drone-Based Traffic Intelligence</title>
-    <meta name="description" content="Advanced drone-based traffic analysis and congestion management system.">
-    <meta name="keywords" content="AI, Traffic, Drone, Intelligence, Dashboard">
-    
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
-    
-    <style type="text/tailwindcss">
-    @layer theme {
-        :root {
-            --primary-color: #10b981; /* Emerald 500 */
-            --secondary-color: #3b82f6; /* Blue 500 */
-            --bg-dark: #030712; /* Gray 950 */
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.06);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trinetra AI | Autonomous Traffic Intelligence</title>
+
+<script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+<script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://resource.trickle.so/vendor_lib/unpkg/lucide-static@0.516.0/font/lucide.css" rel="stylesheet">
+
+<style type="text/tailwindcss">
+@layer base {
+    body {
+        @apply bg-black text-slate-300 antialiased overflow-x-hidden;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+}
+
+@layer components {
+    .glass-panel {
+        @apply bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl;
     }
 
-    @layer base {
-        body {
-            @apply bg-[#050505] text-slate-300 antialiased;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
+    .btn-primary {
+        @apply bg-white text-black font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.35)];
     }
 
-    @layer components {
-        .glass-panel {
-            @apply bg-[var(--glass-bg)] backdrop-blur-2xl border border-[var(--glass-border)] rounded-2xl shadow-2xl;
-        }
-        .btn-primary {
-            @apply bg-white text-black font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)];
-        }
-        .text-gradient {
-            @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-200 to-cyan-400;
-        }
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-200 to-cyan-400;
     }
-    
-    /* Custom animations */
-    .animate-float {
-        animation: float 6s ease-in-out infinite;
+
+    .hero-title {
+        @apply text-6xl md:text-7xl font-extrabold tracking-tight leading-tight;
     }
-    @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
-        100% { transform: translateY(0px); }
-    }
-    </style>
+}
+
+/* ===== CINEMATIC BACKGROUND ===== */
+
+.bg-animated {
+    background: linear-gradient(120deg,#00110f,#000000,#001b18);
+    background-size: 300% 300%;
+    animation: gradientMove 20s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Neural floating particles */
+.neural-bg {
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(16,185,129,0.9) 2px, transparent 3px),
+      radial-gradient(circle at 70% 60%, rgba(16,185,129,0.8) 2px, transparent 3px),
+      radial-gradient(circle at 40% 80%, rgba(16,185,129,0.8) 2px, transparent 3px),
+      radial-gradient(circle at 85% 20%, rgba(16,185,129,0.9) 2px, transparent 3px),
+      radial-gradient(circle at 60% 40%, rgba(16,185,129,0.8) 2px, transparent 3px);
+    background-size: 500px 500px;
+    animation: neuralFloat 40s linear infinite;
+    opacity:0.3;
+}
+
+@keyframes neuralFloat {
+    0% { background-position:0 0; }
+    100% { background-position:500px 500px; }
+}
+
+/* Tactical grid */
+.grid-overlay {
+    position:absolute;
+    inset:0;
+    opacity:0.05;
+    background:
+        linear-gradient(rgba(16,185,129,0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16,185,129,0.4) 1px, transparent 1px);
+    background-size:70px 70px;
+}
+
+/* Fade in animation */
+.fade-in {
+    animation: fadeIn 1.2s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity:0; transform:translateY(20px); }
+    to { opacity:1; transform:translateY(0); }
+}
+</style>
 </head>
+
 <body>
-    <div id="root"></div>
-    <script type="text/babel" src="components/Navbar.js"></script>
-    <script type="text/babel" src="components/Hero.js"></script>
-    <script type="text/babel" src="app.js"></script>
+
+<!-- BACKGROUND LAYERS -->
+<div class="fixed inset-0 bg-animated"></div>
+<div class="fixed inset-0 neural-bg"></div>
+<div class="fixed inset-0 grid-overlay"></div>
+
+<div id="root" class="relative z-10 fade-in"></div>
+
+<script type="text/babel" src="components/Navbar.js"></script>
+<script type="text/babel" src="components/Hero.js"></script>
+<script type="text/babel" src="app.js"></script>
+
 </body>
 </html>

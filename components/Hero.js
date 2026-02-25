@@ -1,82 +1,186 @@
-function Hero() {
-    return (
-        <div className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-[#050505]">
-            {/* Soft Ambient Background */}
-            <div className="absolute top-[-20%] left-[-10%] w-[1000px] h-[1000px] bg-emerald-500/5 rounded-full blur-[150px] pointer-events-none mix-blend-screen"></div>
-            <div className="absolute bottom-[-20%] right-[-10%] w-[800px] h-[800px] bg-blue-600/5 rounded-full blur-[150px] pointer-events-none mix-blend-screen"></div>
-            
-            {/* Subtle Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] pointer-events-none"></div>
+function Hero({ onSequenceComplete }) {
+  const orbRef = React.useRef(null);
+  const [phase, setPhase] = React.useState("enter");
+  const [contentVisible, setContentVisible] = React.useState(false);
 
-            <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
-                <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/5 border border-white/5 backdrop-blur-md mb-10 group cursor-default hover:border-emerald-500/30 transition-colors duration-500">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    <span className="text-sm font-medium text-slate-300">New: 3-Model Ensemble Architecture</span>
-                    <div className="icon-arrow-right text-slate-500 text-xs group-hover:translate-x-0.5 transition-transform"></div>
-                </div>
-                
-                <h1 className="text-6xl md:text-8xl font-bold tracking-tight mb-8 leading-[1.1] text-white">
-                    Traffic Intelligence <br />
-                    <span className="text-gradient">Redefined.</span>
-                </h1>
-                
-                <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-                    Deploy autonomous drone fleets to analyze traffic flow, detect congestion, and optimize city infrastructure with military-grade precision.
-                </p>
-                
-                <div className="flex flex-col md:flex-row items-center justify-center gap-5">
-                    <a href="dashboard.html" className="btn-primary flex items-center gap-2 group">
-                        Start Analysis
-                        <div className="icon-chevron-right group-hover:translate-x-0.5 transition-transform"></div>
-                    </a>
-                    <a href="#demo" className="px-8 py-3 rounded-full text-slate-300 font-medium hover:text-white hover:bg-white/5 transition-all flex items-center gap-2">
-                        <div className="icon-circle-play text-xl"></div>
-                        Watch Demo
-                    </a>
-                </div>
+  React.useEffect(() => {
+    const timers = [];
 
-                {/* Simulated 3D Drone Representation using CSS composition */}
-                <div className="mt-24 relative mx-auto w-full max-w-5xl" style={{ perspective: '1000px' }}>
-                    <div className="relative z-10 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-2xl p-2 shadow-2xl animate-float">
-                        <div className="relative aspect-[21/9] rounded-xl overflow-hidden bg-slate-900 border border-white/5">
-                             {/* Abstract Visualization */}
-                             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-800/50 via-slate-900 to-black"></div>
-                             
-                             {/* Central Focus Ring */}
-                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-emerald-500/20 rounded-full flex items-center justify-center animate-[spin_10s_linear_infinite]">
-                                <div className="w-48 h-48 border border-white/10 rounded-full border-dashed"></div>
-                             </div>
-                             
-                             {/* Scanning Beam */}
-                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full bg-emerald-500/10 blur-sm animate-[pulse_3s_ease-in-out_infinite]"></div>
-                             
-                             {/* HUD Data Points */}
-                             <div className="absolute inset-0 p-12 flex justify-between items-end">
-                                <div className="space-y-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                                        <div className="text-[10px] font-mono text-emerald-500 tracking-widest uppercase">Target Locked</div>
-                                    </div>
-                                    <div className="text-3xl font-mono font-light text-white">84<span className="text-sm text-slate-500 ml-1">vph</span></div>
-                                </div>
-                                <div className="space-y-2 text-right">
-                                    <div className="flex items-center justify-end gap-2">
-                                        <div className="text-[10px] font-mono text-blue-400 tracking-widest uppercase">System Status</div>
-                                        <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                                    </div>
-                                    <div className="text-3xl font-mono font-light text-white">99.8<span className="text-sm text-slate-500 ml-1">%</span></div>
-                                </div>
-                             </div>
-                        </div>
-                    </div>
-                    
-                    {/* Shadow/Glow under the card */}
-                    <div className="absolute -inset-4 bg-emerald-500/20 blur-[100px] -z-10 rounded-full opacity-40"></div>
-                </div>
-            </div>
-        </div>
+    timers.push(setTimeout(() => setPhase("descend"), 1000));
+    timers.push(setTimeout(() => setPhase("hover"), 3200));
+    timers.push(setTimeout(() => setPhase("settle"), 4800));
+
+    timers.push(
+      setTimeout(() => {
+        setPhase("exit");
+        setContentVisible(true);
+        onSequenceComplete && onSequenceComplete();
+      }, 6500)
     );
+
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  React.useEffect(() => {
+    const handleMove = (e) => {
+      const x = (window.innerWidth / 2 - e.clientX) / 100;
+      const y = (window.innerHeight / 2 - e.clientY) / 100;
+      if (orbRef.current) {
+        orbRef.current.style.transform =
+          `rotateY(${x}deg) rotateX(${y}deg)`;
+      }
+    };
+    window.addEventListener("mousemove", handleMove);
+    return () => window.removeEventListener("mousemove", handleMove);
+  }, []);
+
+  const dronePosition = {
+    enter: "-top-96 scale-30 opacity-0",
+    descend: "top-8 scale-110 opacity-100",
+    hover: "top-16 scale-100 opacity-100",
+    settle: "top-20 scale-95 opacity-100",
+    exit: "top-20 scale-85 opacity-0",
+  };
+
+  return (
+    <section className="relative min-h-screen flex items-center bg-[#050505] overflow-hidden">
+
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(16,185,129,0.08),transparent_40%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.06),transparent_40%)]"></div>
+
+      {/* Drone */}
+      {phase !== "exit" && (
+        <div
+          className={`absolute left-1/2 -translate-x-1/2 transition-all duration-[2500ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${dronePosition[phase]}`}
+        >
+          <div className="relative w-32 h-32">
+
+            <div className="absolute inset-0 rounded-full border border-white/20 backdrop-blur-md shadow-[0_0_80px_rgba(255,255,255,0.15)]"></div>
+
+            <div className="absolute -top-5 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-white animate-rotor"></div>
+            <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-24 h-[2px] bg-white animate-rotor"></div>
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 h-24 w-[2px] bg-white animate-rotor"></div>
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 h-24 w-[2px] bg-white animate-rotor"></div>
+
+            <div className="absolute inset-10 bg-black rounded-full border border-white/10 flex items-center justify-center">
+              <div className="w-4 h-4 bg-emerald-400 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main Content */}
+      <div
+        className={`relative z-10 max-w-7xl mx-auto px-12 grid lg:grid-cols-2 gap-24 items-center transition-all duration-[1500ms] ${
+          contentVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+        }`}
+      >
+
+        {/* LEFT */}
+        <div>
+
+          <div className="text-[12px] uppercase tracking-[0.45em] text-emerald-400 mb-14">
+            TRINETRA AI — AUTONOMOUS TRAFFIC INTELLIGENCE
+          </div>
+
+          <h1 className="text-[90px] md:text-[140px] font-extrabold leading-[0.85] tracking-tight text-white">
+            Intelligent
+            <br />
+            Infrastructure.
+          </h1>
+
+          <p className="mt-12 max-w-xl text-lg text-slate-400 leading-relaxed">
+            Real-time drone-powered systems monitoring traffic flow,
+            forecasting congestion and optimizing modern city mobility.
+          </p>
+
+          <div className="mt-16 flex gap-12 items-center">
+
+            {/* ULTRA Highlight CTA */}
+            <a
+              href="dashboard.html"
+              className="relative px-10 py-4 rounded-full 
+              bg-gradient-to-r from-emerald-400 to-cyan-400
+              text-black font-bold text-lg
+              transition-all duration-300
+              hover:scale-105
+              shadow-[0_0_40px_rgba(16,185,129,0.4)]
+              hover:shadow-[0_0_100px_rgba(16,185,129,0.8)]"
+            >
+              Launch Platform
+            </a>
+
+            <a
+              href="#demo"
+              className="text-slate-500 text-lg hover:text-white transition-colors duration-300"
+            >
+              View Demo
+            </a>
+
+          </div>
+        </div>
+
+        {/* RIGHT ORB — SHIFTED */}
+        <div className="relative flex items-center justify-end perspective-[1200px]">
+
+          <div className="absolute right-0 translate-x-20 xl:translate-x-32">
+
+            <div
+              ref={orbRef}
+              className="relative w-[500px] h-[500px] transition-transform duration-200 ease-out"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+
+              <div className="absolute inset-0 rounded-full border border-white/10"></div>
+              <div className="absolute inset-16 rounded-full border border-emerald-500/30 animate-spin-slow"></div>
+              <div className="absolute inset-32 rounded-full border border-white/10 border-dashed"></div>
+
+              {/* 3D CORE */}
+              <div className="absolute inset-[170px] rounded-full 
+                bg-gradient-to-br from-slate-900 via-black to-slate-950
+                border border-white/10
+                shadow-[inset_0_0_60px_rgba(0,0,0,0.9),0_0_80px_rgba(16,185,129,0.4)]
+                flex items-center justify-center">
+
+                <div className="absolute inset-6 rounded-full border border-emerald-500/30"></div>
+                <div className="w-8 h-8 bg-emerald-400 rounded-full blur-md animate-pulse"></div>
+
+                <span className="absolute text-[10px] tracking-[0.4em] text-white">
+                  TRINETRA CORE
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <style>
+        {`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotor {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        .animate-spin-slow {
+          animation: spin-slow 80s linear infinite;
+        }
+
+        .animate-rotor {
+          animation: rotor 0.6s linear infinite;
+        }
+        `}
+      </style>
+
+    </section>
+  );
 }
