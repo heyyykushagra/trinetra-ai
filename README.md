@@ -86,9 +86,6 @@ The system generates actionable recommendations based on traffic conditions, ena
 
 ---
 
-## Demo Video
-
-https://your-video-link.com
 
 ---
 
