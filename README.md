@@ -25,7 +25,7 @@ The system is built with a focus on real-world deployment, scalability, and end-
 ## System Architecture
 
 <p align="center">
-  <img src="YOUR_ARCHITECTURE_IMAGE_LINK" width="85%" />
+  <img src="https://github.com/heyyykushagra/trinetra-ai/blob/main/Gemini_Generated_Image_wm42k5wm42k5wm42.png" width="85%" />
 </p>
 
 The system processes drone video input through a multi-stage AI pipeline:
