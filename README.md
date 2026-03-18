@@ -84,7 +84,6 @@ Users can upload traffic footage, run AI-based analysis, and receive predictions
 
 The system generates actionable recommendations based on traffic conditions, enabling intelligent decision-making for congestion control.
 
----
 
 
 ---
